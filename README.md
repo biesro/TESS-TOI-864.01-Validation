@@ -56,7 +56,7 @@ To reproduce the analysis:
 ## Citation
 If you use this data or methodology, please cite this repository via Zenodo:
 
-> Escolà Rodrigo, B. (2025). *Validation of Ultra-Short Period Sub-Earth TOI 864.01*. [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17883381.svg)](https://doi.org/10.5281/zenodo.17883381)
+> Escolà Rodrigo, B. (2025). *Validation of Ultra-Short Period Sub-Earth TOI 864.01*. [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17886780.svg)](https://doi.org/10.5281/zenodo.17885780)
 
 ---
 **Principal Investigator:** Biel Escolà Rodrigo  
