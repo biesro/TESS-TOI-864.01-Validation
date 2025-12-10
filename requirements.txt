@@ -1,0 +1,6 @@
+lightkurve>=2.0.0
+astropy>=5.0
+numpy
+matplotlib
+scipy
+pandas
