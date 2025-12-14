@@ -116,16 +116,19 @@ plt.show()
 print("\n" + "="*50)
 print(f"📊 MY FINAL SCIENTIFIC REPORT: {TOI_ID}")
 print("="*50)
-print(f"1. True Depth Measured: {depth_ppm:.2f} ppm")
-print(f"2. Background Noise:    {noise_ppm:.2f} ppm")
+
+# SOLUCIÓ: Posem float() per convertir la dada complexa en un número normal
+print(f"1. True Depth Measured: {float(depth_ppm.value):.2f} ppm")
+print(f"2. Background Noise:    {float(noise_ppm.value):.2f} ppm")
 print("-" * 30)
-print(f"3. SNR (Signal/Noise):  {snr_final:.2f}")
+print(f"3. SNR (Signal/Noise):  {float(snr_final.value):.2f}")
 print("-" * 30)
 
 print("MY INTERPRETATION:")
-if snr_final > 7.1:
+# Aquí també hem d'assegurar-nos que comparem números normals
+if snr_final.value > 7.1:
     print("✅ SUCCESS: SNR > 7.1. I confirm a robust detection.")
-    if abs(depth_ppm) < 500:
+    if abs(depth_ppm.value) < 500:
         print("   NOTE: I observe a small depth (<500 ppm), compatible with an Earth/Super-Earth planet.")
 else:
     print("⚠️ WARNING: Low SNR. I cannot confirm the signal clearly.")
