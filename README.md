@@ -82,22 +82,24 @@ To reproduce the analysis on your local machine:
 Clone the repository:
 
 Bash
-
+```text
 git clone [https://github.com/biesro/TOI-864.01-Vetting.git](https://github.com/biesro/TOI-864.01-Vetting.git)
 cd TOI-864.01-Vetting
+```
 Install dependencies: It is recommended to use a virtual environment.
 
 Bash
-
+```text
 pip install -r requirements.txt
+```
 Run the pipeline: Execute the scripts in numerical order:
 
 Bash
-
+```text
 python code/01_detection_BLS.py
 python code/02_centroid_test.py
-# ... and so on
-
+... and so on
+```
 ## 📄 Citation
 If you use this data or methodology, please cite the associated arXiv paper or the Zenodo repository:
 
