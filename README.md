@@ -64,7 +64,7 @@ The validation process follows a rigorous sequential protocol implemented in Pyt
 ```text
 TOI-864.01-Vetting/
 │
-├── Final_864.01.pdf           # Full scientific paper (arXiv preprint)
+├── Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01.pdf           # Full scientific paper (arXiv preprint)
 ├── requirements.txt           # Python dependencies
 ├── README.md                  # Project documentation
 │
