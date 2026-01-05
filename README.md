@@ -103,6 +103,6 @@ python code/02_centroid_test.py
 ## 📄 Citation
 If you use this data or methodology, please cite the associated arXiv paper or the Zenodo repository:
 
-Escolà Rodrigo, B. (2026). Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01. [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17881756.svg)](https://doi.org/10.5281/zenodo.17881756)
+Escolà Rodrigo, B. (2026). Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01.  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17881756.svg)](https://doi.org/10.5281/zenodo.17881756)
 
 This research made use of the NASA Exoplanet Archive and the TESS mission data.
