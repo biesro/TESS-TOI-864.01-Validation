@@ -1,0 +1,20 @@
+# --- Python & Jupyter ---
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# --- Dades Massives (NO PUJAR MAI) ---
+*.fits
+*.csv
+.mastDownload/
+mastDownload/
+tess-cut/
+
+# --- Resultats de Juliet (Massa fitxers petits) ---
+results_*/
+posteriors.pkl
+errors.pkl
+
+# --- Sistema Operatiu ---
+.DS_Store
+Thumbs.db
