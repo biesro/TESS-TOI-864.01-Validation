@@ -75,8 +75,8 @@ TOI-864.01-Vetting/
     ├── 04_juliet_model_comparison.py
     ├── 05_sanity_checks.py
     └── 06_planet_parameters.py
-
-🚀 Usage
+```
+## 🚀 Usage
 To reproduce the analysis on your local machine:
 
 Clone the repository:
@@ -97,7 +97,8 @@ Bash
 python code/01_detection_BLS.py
 python code/02_centroid_test.py
 # ... and so on
-📄 Citation
+
+## 📄 Citation
 If you use this data or methodology, please cite the associated arXiv paper or the Zenodo repository:
 
 Escolà Rodrigo, B. (2026). Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01. arXiv preprint. DOI: 10.5281/zenodo.17881756
