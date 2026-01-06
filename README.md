@@ -109,8 +109,8 @@ Note: The notebook contains a built-in patch to resolve AttributeError: module '
 ## 📄 Citation
 If you use this data or methodology, please cite the arXiv paper:
 
-BibTeX:
-
+**BibTeX:**
+```bibtex
 @article{escola2026toi864,
   title={Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01},
   author={Escolà Rodrigo, Biel},
@@ -118,5 +118,5 @@ BibTeX:
   year={2026},
   url={[https://arxiv.org/abs/2601.02171](https://arxiv.org/abs/2601.02171)}
 }
-
+```
 This research made use of the NASA Exoplanet Archive and the TESS mission data.
