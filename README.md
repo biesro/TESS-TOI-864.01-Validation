@@ -96,12 +96,19 @@ Bash
 pip install -r requirements.txt
 python code/01_detection_BLS.py
 ```
-3. Running the Validation Notebook (Triceratops)
-The statistical vetting notebook uses a specific set of libraries (numpy==1.26.4, triceratops==1.0.20).
+### 3. Running the Validation Notebook (Triceratops)
+**⚠️ IMPORTANT:** The statistical vetting notebook requires a **specific legacy environment** (`numpy==1.26.4`). We strongly recommend creating a **fresh virtual environment** for this step to avoid conflicts.
 
 Bash
 ```text
-pip install -r requirements-jupyter.txt
+# Create and activate a new environment
+conda create -n toi_validation python=3.10
+conda activate toi_validation
+
+# Install the specific validation stack AND Jupyter
+pip install -r requirements-jupyter.txt notebook
+
+# Launch the notebook
 jupyter notebook code/03_triceratops_vetting.ipynb
 ```
 Note: The notebook contains a built-in patch to resolve AttributeError: module 'numpy' has no attribute 'int'.
