@@ -111,8 +111,6 @@ If you use this data or methodology, please cite the arXiv paper:
 
 BibTeX:
 
-Fragmento de código
-
 @article{escola2026toi864,
   title={Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01},
   author={Escolà Rodrigo, Biel},
@@ -120,4 +118,5 @@ Fragmento de código
   year={2026},
   url={[https://arxiv.org/abs/2601.02171](https://arxiv.org/abs/2601.02171)}
 }
+
 This research made use of the NASA Exoplanet Archive and the TESS mission data.
