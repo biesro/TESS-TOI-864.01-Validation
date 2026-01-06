@@ -1,13 +1,9 @@
-# Core Scientific Stack
 numpy==1.26.4
+matplotlib==3.10.8
 lightkurve==2.5.1
-
-# Validation & Modeling Tools
 triceratops==1.0.20
 juliet==2.2.8
-
-# Key Dependencies
-astropy
-astroquery
-batman-package
-dynesty
+astropy==6.1.7
+astroquery==0.4.11
+batman-package==2.5.3
+dynesty==3.0.0
