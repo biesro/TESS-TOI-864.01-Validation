@@ -1,12 +1,13 @@
 # Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01
 
-![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
+![Python Version](https://img.shields.io/badge/python-3.10-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Status](https://img.shields.io/badge/status-submitted_to_arXiv-orange)
+[![arXiv](https://img.shields.io/badge/arXiv-2601.02171-b31b1b.svg)](https://arxiv.org/abs/2601.02171)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17881756.svg)](https://doi.org/10.5281/zenodo.17881756)
 
 **Principal Investigator:** Biel Escolà Rodrigo  
-**Date:** January 2026
+**Date:** January 2026  
+**Paper:** [arXiv:2601.02171](https://arxiv.org/abs/2601.02171)
 
 ---
 
@@ -30,33 +31,34 @@ Based on the analysis of **54 TESS Sectors**:
 | **Transit Depth** | ~158 ppm | - | MCMC Posterior |
 | **Equilibrium Temp** | ~1100 K | - | Bond Albedo = 0 |
 
-## ⚙️ Methodology & Pipeline
-The validation process follows a rigorous sequential protocol implemented in Python. The repository is structured to reproduce the analysis step-by-step:
+## ⚙️ Methodology & Software Stack
+The validation process follows a rigorous sequential protocol implemented in Python. Special attention has been paid to reproducibility due to version constraints in legacy astronomical libraries.
 
 ### 1. Detection & Signal Recovery
-* **Tool:** `Lightkurve` + Box Least Squares (BLS)
+* **Tool:** `Lightkurve` (v2.5.1) + Box Least Squares (BLS)
 * **Process:** Downloads SPOC data, stitches sectors, removes outliers ($\sigma=5$), and recovers the periodic signal.
 * **Script:** `code/01_detection_BLS.py`
 
 ### 2. Centroid Analysis
-* **Tool:** `Lightkurve` (Moment analysis)
+* **Tool:** `Lightkurve` + `Matplotlib` (v3.10.8)
 * **Test:** Verifies that the center-of-light does not shift during transit events, ruling out background contaminants.
 * **Script:** `code/02_centroid_test.py`
 
 ### 3. Statistical Vetting (FPP/NFPP)
-* **Tool:** `TRICERATOPS`
-* **Test:** Calculates the Nearby False Positive Probability (NFPP) to quantify the risk of contamination from nearby stars. Result: **NFPP = 0.0000**.
+* **Tool:** `triceratops` (v1.0.20)
+* **Test:** Calculates the Nearby False Positive Probability (NFPP) via 50,000 Monte Carlo simulations. Result: **NFPP = 0.0000**.
 * **Notebook:** `code/03_triceratops_vetting.ipynb`
+* **Note:** This notebook includes a compatibility patch for `numpy` (v1.26.4) to handle deprecated `np.int` types required by `triceratops`.
 
 ### 4. Bayesian Model Comparison
-* **Tool:** `juliet` (Nested Sampling via `dynesty`)
+* **Tool:** `juliet` (v2.2.8) powered by `dynesty` (v3.0.0) & `batman-package` (v2.5.3)
 * **Test:** Compares the Bayesian Evidence ($\ln Z$) of a Planetary Model vs. an Eclipsing Binary Model.
 * **Script:** `code/04_juliet_model_comparison.py`
 
 ### 5. Physical Sanity Checks
 * **Test:**
     * **Odd-Even Asymmetry:** Checks for depth differences (ruled out at $<1\sigma$).
-    * **Density Check:** Compares transit-derived stellar density with catalog density (Ratio $\approx 1.04$).
+    * **Density Check:** Compares transit-derived stellar density with catalog density (`astropy` v6.1.7).
 * **Script:** `code/05_sanity_checks.py`
 
 ## 📂 Repository Structure
@@ -64,45 +66,58 @@ The validation process follows a rigorous sequential protocol implemented in Pyt
 ```text
 TOI-864.01-Vetting/
 │
-├── Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01.pdf           # Full scientific paper (arXiv preprint)
-├── requirements.txt           # Python dependencies
+├── Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01.pdf   # Full scientific paper (arXiv preprint)
+├── requirements.txt           # Main dependencies for .py scripts (Juliet, Astropy, etc.)
+├── requirements-jupyter.txt   # Specific dependencies for the vetting Notebook (Triceratops env)
 ├── README.md                  # Project documentation
 │
 ├── code/                      # Analysis scripts
     ├── 01_detection_BLS.py
     ├── 02_centroid_test.py
-    ├── 03_triceratops_vetting.ipynb
+    ├── 03_triceratops_vetting.ipynb  <-- Run this for FPP validation
     ├── 04_juliet_model_comparison.py
     ├── 05_sanity_checks.py
     └── 06_planet_parameters.py
 ```
-## 🚀 Usage
-To reproduce the analysis on your local machine:
+## 🚀 Usage & Reproducibility
+To reproduce the analysis, please note that the Jupyter Notebook (03) requires a specific environment configuration to support triceratops.
 
-Clone the repository:
-
+1. Clone the repository
 Bash
 ```text
 git clone [https://github.com/biesro/TOI-864.01-Vetting.git](https://github.com/biesro/TOI-864.01-Vetting.git)
 cd TOI-864.01-Vetting
 ```
-Install dependencies: It is recommended to use a virtual environment.
+2. Running the Python Scripts (Modeling)
+For general scripts (BLS detection, Juliet modeling, Sanity checks):
 
 Bash
 ```text
 pip install -r requirements.txt
+python code/01_detection_BLS.py
 ```
-Run the pipeline: Execute the scripts in numerical order:
+3. Running the Validation Notebook (Triceratops)
+The statistical vetting notebook uses a specific set of libraries (numpy==1.26.4, triceratops==1.0.20).
 
 Bash
 ```text
-python code/01_detection_BLS.py
-python code/02_centroid_test.py
-... and so on
+pip install -r requirements-jupyter.txt
+jupyter notebook code/03_triceratops_vetting.ipynb
 ```
+Note: The notebook contains a built-in patch to resolve AttributeError: module 'numpy' has no attribute 'int'.
+
 ## 📄 Citation
-If you use this data or methodology, please cite the associated arXiv paper or the Zenodo repository:
+If you use this data or methodology, please cite the arXiv paper:
 
-Escolà Rodrigo, B. (2026). Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01.  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17881756.svg)](https://doi.org/10.5281/zenodo.17881756)
+BibTeX:
 
+Fragmento de código
+
+@article{escola2026toi864,
+  title={Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01},
+  author={Escolà Rodrigo, Biel},
+  journal={arXiv preprint arXiv:2601.02171},
+  year={2026},
+  url={[https://arxiv.org/abs/2601.02171](https://arxiv.org/abs/2601.02171)}
+}
 This research made use of the NASA Exoplanet Archive and the TESS mission data.
