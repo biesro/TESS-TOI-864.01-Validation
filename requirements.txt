@@ -1,3 +1,4 @@
+python==3.10.19
 numpy==1.26.4
 matplotlib==3.10.8
 lightkurve==2.5.1
