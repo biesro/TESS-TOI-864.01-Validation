@@ -1,9 +1,13 @@
-numpy
-matplotlib
-lightkurve
+# Core Scientific Stack
+numpy==1.26.4
+lightkurve==2.5.1
+
+# Validation & Modeling Tools
+triceratops==1.0.20
+juliet==2.2.8
+
+# Key Dependencies
 astropy
 astroquery
-juliet
+batman-package
 dynesty
-triceratops
-pandas
