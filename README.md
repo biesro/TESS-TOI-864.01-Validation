@@ -5,7 +5,8 @@
 
 ![Python Version](https://img.shields.io/badge/python-3.10-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-[![arXiv](https://img.shields.io/badge/arXiv-Submitted-b31b1b.svg)](https://arxiv.org/)
+[![arXiv](https://img.shields.io/badge/arXiv-2601.02171-b31b1b.svg)](https://arxiv.org/abs/2601.02171)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17881756.svg)](https://doi.org/10.5281/zenodo.17881756)
 [![Status](https://img.shields.io/badge/Status-Probable%20FP-orange.svg)]()
 
 **Principal Investigator:** Biel Escolà Rodrigo  
@@ -109,15 +110,29 @@ jupyter notebook code/03_triceratops_vetting.ipynb
 Note: The notebook contains a built-in patch to resolve AttributeError: module 'numpy' has no attribute 'int'.
 
 ## 📄 Citation
-If you use this data or methodology, please cite the arXiv paper:
+If you use this data or methodology, please cite the arXiv paper. If you use the specific code pipeline, you may also cite the software record.
 
-**BibTeX:**
+**Paper (BibTeX):**
 ```bibtex
 @article{escola2026toi864,
   title={Vetting and False Positive Analysis of TOI 864.01: Evidence for a Likely Hierarchical Eclipsing Binary Masked by Dilution},
   author={Escolà Rodrigo, Biel},
-  journal={arXiv preprint arxiv:2601.02171 },
+  journal={arXiv preprint arXiv:2601.02171 },
   year={2026}
+  url={[https://arxiv.org/abs/2601.02171](https://arxiv.org/abs/2601.02171)}
 }
 ```
+**Software (BibTeX):**
+```bibtex
+
+@software{escola2026code,
+  author       = {Biel Escolà Rodrigo},
+  title        = {TESS-TOI-864.01-Validation: Analysis Pipeline},
+  year         = 2026,
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.17881756},
+  url          = {[https://doi.org/10.5281/zenodo.17881756](https://doi.org/10.5281/zenodo.17881756)}
+}
+```
+
 This research made use of the NASA Exoplanet Archive, TESS mission data, and the TFOP SG1 imaging notes.
