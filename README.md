@@ -6,7 +6,7 @@
 ![Python Version](https://img.shields.io/badge/python-3.10-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 [![arXiv](https://img.shields.io/badge/arXiv-Submitted-b31b1b.svg)](https://arxiv.org/)
-[![Status](https://img.shields.io/badge/Status-False%20Positive-red.svg)]()
+[![Status](https://img.shields.io/badge/Status-Probable%20FP-orange.svg)]()
 
 **Principal Investigator:** Biel Escolà Rodrigo  
 **Date:** January 2026  
