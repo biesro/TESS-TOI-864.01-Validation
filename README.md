@@ -118,7 +118,7 @@ If you use this data or methodology, please cite the arXiv paper. If you use the
   title={Vetting and False Positive Analysis of TOI 864.01: Evidence for a Likely Hierarchical Eclipsing Binary Masked by Dilution},
   author={Escolà Rodrigo, Biel},
   journal={arXiv preprint arXiv:2601.02171 },
-  year={2026}
+  year={2026},
   url={[https://arxiv.org/abs/2601.02171](https://arxiv.org/abs/2601.02171)}
 }
 ```
