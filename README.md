@@ -81,7 +81,7 @@ To reproduce the analysis, please note that the Jupyter Notebook (03) requires a
 1. Clone the repository
 Bash
 ```text
-git clone [https://github.com/biesro/TESS-TOI-864.01-Validation.git](https://github.com/biesro/TESS-TOI-864.01-Validation.git)
+git clone https://github.com/biesro/TESS-TOI-864.01-Validation.git
 cd TESS-TOI-864.01-Validation
 ```
 2. Running the Python Scripts (Modeling)
@@ -117,9 +117,9 @@ If you use this data or methodology, please cite the arXiv paper. If you use the
 @article{escola2026toi864,
   title={Vetting and False Positive Analysis of TOI 864.01: Evidence for a Likely Hierarchical Eclipsing Binary Masked by Dilution},
   author={Escolà Rodrigo, Biel},
-  journal={arXiv preprint arXiv:2601.02171 },
+  journal={arXiv preprint arXiv:2601.02171},
   year={2026},
-  url={[https://arxiv.org/abs/2601.02171](https://arxiv.org/abs/2601.02171)}
+  url={https://arxiv.org/abs/2601.02171}
 }
 ```
 **Software (BibTeX):**
@@ -131,7 +131,7 @@ If you use this data or methodology, please cite the arXiv paper. If you use the
   year         = 2026,
   publisher    = {Zenodo},
   doi          = {10.5281/zenodo.17881756},
-  url          = {[https://doi.org/10.5281/zenodo.17881756](https://doi.org/10.5281/zenodo.17881756)}
+  url          = {https://doi.org/10.5281/zenodo.17881756}
 }
 ```
 
