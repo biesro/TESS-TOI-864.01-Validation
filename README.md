@@ -80,8 +80,8 @@ To reproduce the analysis, please note that the Jupyter Notebook (03) requires a
 1. Clone the repository
 Bash
 ```text
-git clone [https://github.com/biesro/TOI-864.01-Vetting.git](https://github.com/biesro/TOI-864.01-Vetting.git)
-cd TOI-864.01-Vetting
+git clone [https://github.com/biesro/TESS-TOI-864.01-Validation.git](https://github.com/biesro/TESS-TOI-864.01-Validation.git)
+cd TESS-TOI-864.01-Validation
 ```
 2. Running the Python Scripts (Modeling)
 For general scripts (BLS detection, Juliet modeling, Sanity checks):
@@ -114,11 +114,10 @@ If you use this data or methodology, please cite the arXiv paper:
 **BibTeX:**
 ```bibtex
 @article{escola2026toi864,
-  title={Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01},
+  title={Vetting and False Positive Analysis of TOI 864.01: Evidence for a Likely Hierarchical Eclipsing Binary Masked by Dilution},
   author={Escolà Rodrigo, Biel},
-  journal={arXiv preprint arXiv:2601.02171},
-  year={2026},
-  url={[https://arxiv.org/abs/2601.02171](https://arxiv.org/abs/2601.02171)}
+  journal={arXiv preprint arxiv:2601.02171 },
+  year={2026}
 }
 ```
-This research made use of the NASA Exoplanet Archive and the TESS mission data.
+This research made use of the NASA Exoplanet Archive, TESS mission data, and the TFOP SG1 imaging notes.
