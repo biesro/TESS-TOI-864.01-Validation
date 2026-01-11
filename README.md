@@ -1,83 +1,78 @@
-# Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01
+# Vetting and False Positive Analysis of TOI 864.01
+
+**Code repository for the paper:**
+> *Vetting and False Positive Analysis of TOI 864.01: Evidence for a Likely Hierarchical Eclipsing Binary Masked by Dilution*
 
 ![Python Version](https://img.shields.io/badge/python-3.10-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-[![arXiv](https://img.shields.io/badge/arXiv-2601.02171-b31b1b.svg)](https://arxiv.org/abs/2601.02171)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17881756.svg)](https://doi.org/10.5281/zenodo.17881756) 
+[![arXiv](https://img.shields.io/badge/arXiv-Submitted-b31b1b.svg)](https://arxiv.org/)
+[![Status](https://img.shields.io/badge/Status-False%20Positive-red.svg)]()
 
 **Principal Investigator:** Biel Escolà Rodrigo  
 **Date:** January 2026  
-**Paper:** [arXiv:2601.02171](https://arxiv.org/abs/2601.02171)
 
 ---
 
 ## 🔭 Abstract
-This repository contains the complete validation analysis and vetting pipeline for **TOI 864.01** (TIC 231728511), a sub-Earth candidate observed by the NASA TESS mission.
+This repository contains the complete analysis pipeline used to reclassify **TOI 864.01** (TIC 231728511), initially identified as a potential ultra-short-period ($P \approx 0.52$ d) Earth-sized candidate ($R_p \approx 1.1 R_\oplus$).
 
-Despite the low Signal-to-Noise Ratio (SNR) inherent to sub-Earth candidates, we present a robust **physical vetting framework** that confirms the planetary nature of the signal. By combining standard photometry with Bayesian model comparison (`juliet`) and False Positive Probability analysis (`triceratops`), we rule out astrophysical false positives such as background eclipsing binaries and hierarchical triples.
+While standard vetting metrics (BLS, Centroids, RUWE) initially suggested a planetary nature, our comprehensive analysis incorporating **archival high-resolution imaging** and **Bayesian model comparison** reveals a critical contamination source. We present evidence that the signal is a **False Positive** caused by a Hierarchical Eclipsing Binary (HEB) on a bound stellar companion at 0.04", whose deep eclipses are heavily diluted by the primary star.
 
-The analysis confirms a transit signal consistent with an **Ultra-Short Period (USP) Sub-Earth** ($0.55 R_\oplus$) orbiting an M-dwarf star with a period of just **0.52 days**.
+This repository provides the code to reproduce the detection, the statistical validation failure (due to extreme dilution), and the physical parameter derivation that led to this reclassification.
 
-## 🌍 Key Physical Parameters
-Based on the analysis of **54 TESS Sectors**:
+## 🌍 Key Findings & Reclassification Parameters
 
-| Parameter | Value | Uncertainty | Method |
-| :--- | :--- | :--- | :--- |
-| **Target** | TIC 231728511 | - | TOI 864.01 |
-| **Host Star Type** | M-Dwarf | - | Red Dwarf ($0.399 R_\odot$) |
-| **Orbital Period** | **0.52067 days** | $\pm 10^{-5}$ | BLS Detection |
-| **Planet Radius** | **0.55 $R_\oplus$** | - | `juliet` Modeling |
-| **Semi-Major Axis** | 0.0093 AU | - | Kepler's 3rd Law |
-| **Transit Depth** | ~158 ppm | - | MCMC Posterior |
-| **Equilibrium Temp** | ~1100 K | - | Bond Albedo = 0 |
+Based on the analysis of **12 TESS Sectors** and TFOP SG1 constraints:
+
+| Parameter | Value | Note |
+| :--- | :--- | :--- |
+| **Target** | TIC 231728511 | M-Dwarf ($0.399 R_\odot$) |
+| **Signal Period** | **0.52067 days** | Robust detection |
+| **SPOC Depth** | ~640 ppm | Undiluted baseline |
+| **Recovered Depth** | ~158 ppm | Attenuated by detrending |
+| **Contaminant** | **0.04" Companion** | Detected by TFOP SG1 |
+| **Validation Status** | **FALSE POSITIVE** | Statistical validation fails (NaN) |
+| **Classification** | Hierarchical EB | Masked by heavy dilution |
 
 ## ⚙️ Methodology & Software Stack
-The validation process follows a rigorous sequential protocol implemented in Python. Special attention has been paid to reproducibility due to version constraints in legacy astronomical libraries.
+The analysis follows a rigorous forensic protocol implemented in Python.
 
 ### 1. Detection & Signal Recovery
 * **Tool:** `Lightkurve` (v2.5.1) + Box Least Squares (BLS)
-* **Process:** Downloads SPOC data, stitches sectors, removes outliers ($\sigma=5$), and recovers the periodic signal.
+* **Finding:** Recovers the periodic signal but highlights significant depth attenuation (~158 ppm) compared to SPOC, flagging potential dilution issues.
 * **Script:** `code/01_detection_BLS.py`
 
 ### 2. Centroid Analysis
-* **Tool:** `Lightkurve` + `Matplotlib` (v3.10.8)
-* **Test:** Verifies that the center-of-light does not shift during transit events, ruling out background contaminants.
+* **Tool:** `Lightkurve` + `Matplotlib`
+* **Finding:** Centroids show no significant shift. **Critical Note:** This test fails to identify the false positive because the contaminant (0.04") is too close to be resolved by TESS pixel centroids (~21"/pixel).
 * **Script:** `code/02_centroid_test.py`
 
-### 3. Statistical Vetting (FPP/NFPP)
+### 3. Statistical Validation (TRICERATOPS)
 * **Tool:** `triceratops` (v1.0.20)
-* **Test:** Calculates the Nearby False Positive Probability (NFPP) via 50,000 Monte Carlo simulations. Result: **NFPP = 0.0000**.
+* **Finding:** When the 0.04" companion is added to the aperture, the False Positive Probability (FPP) calculation **fails to converge (returns NaN)**. This non-convergence is a key result, indicating that statistical validation is inapplicable in regimes of such extreme contamination.
 * **Notebook:** `code/03_triceratops_vetting.ipynb`
-* **Note:** This notebook includes a compatibility patch for `numpy` (v1.26.4) to handle deprecated `np.int` types required by `triceratops`.
 
 ### 4. Bayesian Model Comparison
-* **Tool:** `juliet` (v2.2.8) powered by `dynesty` (v3.0.0) & `batman-package` (v2.5.3)
-* **Test:** Compares the Bayesian Evidence ($\ln Z$) of a Planetary Model vs. an Eclipsing Binary Model.
+* **Tool:** `juliet` (v2.2.8) powered by `dynesty`
+* **Finding:** Compares Planetary vs. Eclipsing Binary models. Result is inconclusive ($\Delta \ln Z \approx 0.09$), confirming that photometry alone cannot distinguish the scenarios due to the blending degeneracy.
 * **Script:** `code/04_juliet_model_comparison.py`
-
-### 5. Physical Sanity Checks
-* **Test:**
-    * **Odd-Even Asymmetry:** Checks for depth differences (ruled out at $<1\sigma$).
-    * **Density Check:** Compares transit-derived stellar density with catalog density (`astropy` v6.1.7).
-* **Script:** `code/05_sanity_checks.py`
 
 ## 📂 Repository Structure
 
 ```text
 TOI-864.01-Vetting/
 │
-├── Physical Vetting of the Ultra-Short-Period Sub-Earth TOI 864.01.pdf   # Full scientific paper (arXiv preprint)
-├── requirements.txt           # Main dependencies for .py scripts (Juliet, Astropy, etc.)
-├── requirements-jupyter.txt   # Specific dependencies for the vetting Notebook (Triceratops env)
+├── requirements.txt           # Main dependencies (juliet, lightkurve, etc.)
 ├── README.md                  # Project documentation
 │
 ├── code/                      # Analysis scripts
     ├── 01_detection_BLS.py
     ├── 02_centroid_test.py
-    ├── 03_triceratops_vetting.ipynb  <-- Run this for FPP validation
+    ├── 03_triceratops_vetting.ipynb  <-- Key validation step
     ├── 04_juliet_model_comparison.py
     ├── 05_sanity_checks.py
     └── 06_planet_parameters.py
+└── figures/                   # Generated plots (included in the paper)
 ```
 ## 🚀 Usage & Reproducibility
 To reproduce the analysis, please note that the Jupyter Notebook (03) requires a specific environment configuration to support triceratops.
