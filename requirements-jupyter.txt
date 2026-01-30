@@ -1,5 +1,0 @@
-python==3.10.12
-numpy==1.26.4
-pandas==2.2.2
-lightkurve==2.5.1
-triceratops==1.0.20
