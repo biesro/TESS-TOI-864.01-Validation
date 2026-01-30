@@ -15,11 +15,18 @@
 ---
 
 ## 🔭 Abstract
+
 This repository contains the complete analysis pipeline used to reclassify **TOI 864.01** (TIC 231728511), initially identified as a potential ultra-short-period ($P \approx 0.52$ d) Earth-sized candidate ($R_p \approx 1.1 R_\oplus$).
 
-While standard vetting metrics (BLS, Centroids, RUWE) initially suggested a planetary nature, our comprehensive analysis incorporating **archival high-resolution imaging** and **Bayesian model comparison** reveals a critical contamination source. We present evidence that the signal is a **False Positive** caused by a Hierarchical Eclipsing Binary (HEB) on a bound stellar companion at 0.04", whose deep eclipses are heavily diluted by the primary star.
+While standard vetting metrics (BLS, Centroids, RUWE) initially suggested a planetary nature, our comprehensive analysis incorporating **archival high-resolution imaging**, **ground-based follow-up photometry**, and **Bayesian model comparison** reveals a critical contamination source. We present evidence that the signal is a **False Positive** caused by a Hierarchical Eclipsing Binary (HEB) on a bound stellar companion at 0.04", whose deep eclipses are heavily diluted by the primary star.
 
-This repository provides the code to reproduce the detection, the statistical validation failure (due to extreme dilution), and the physical parameter derivation that led to this reclassification.
+Key findings supporting this reclassification include:
+
+* **Unresolved Companion:** A 0.04" neighbor detected via speckle interferometry (TFOP SG1).
+* **Depth Discrepancy:** Ground-based transit depth ($\approx 0.37$ ppt) is significantly shallower than the TESS prediction ($\approx 0.64$ ppt), confirming extreme dilution.
+* **Timing Instability:** A measured timing offset of **6.3 minutes late** (along with historical TTVs) consistent with binary orbital dynamics.
+
+This repository provides the code to reproduce the detection, the statistical validation analysis (which yields misleading results due to the unresolved companion), and the physical parameter derivation that led to this reclassification.
 
 ## 🌍 Key Findings & Reclassification Parameters
 
@@ -32,7 +39,7 @@ Based on the analysis of **12 TESS Sectors** and TFOP SG1 constraints:
 | **SPOC Depth** | ~640 ppm | Undiluted baseline |
 | **Recovered Depth** | ~158 ppm | Attenuated by detrending |
 | **Contaminant** | **0.04" Companion** | Detected by TFOP SG1 |
-| **Validation Status** | **FALSE POSITIVE** | Statistical validation fails (NaN) |
+| **Validation Status** | **FPP ~0.25 (Unreliable)** | Misleading due to catalog incompleteness |
 | **Classification** | Hierarchical EB | Masked by heavy dilution |
 
 ## ⚙️ Methodology & Software Stack
@@ -50,12 +57,12 @@ The analysis follows a rigorous forensic protocol implemented in Python.
 
 ### 3. Statistical Validation (TRICERATOPS)
 * **Tool:** `triceratops` (v1.0.20)
-* **Finding:** When the 0.04" companion is added to the aperture, the False Positive Probability (FPP) calculation **fails to converge (returns NaN)**. This non-convergence is a key result, indicating that statistical validation is inapplicable in regimes of such extreme contamination.
+* **Finding:** The analysis yields a False Positive Probability (FPP) of **~0.25**. This result is **misleadingly optimistic** because the tool relies on Gaia catalogs, which do not resolve the 0.04" companion. This demonstrates the limitation of statistical validation when catalogs are incomplete.
 * **Notebook:** `code/03_triceratops_vetting.ipynb`
 
 ### 4. Bayesian Model Comparison
 * **Tool:** `juliet` (v2.2.8) powered by `dynesty`
-* **Finding:** Compares Planetary vs. Eclipsing Binary models. Result is inconclusive ($\Delta \ln Z \approx 0.09$), confirming that photometry alone cannot distinguish the scenarios due to the blending degeneracy.
+* **Finding:** Compares Planetary vs. Eclipsing Binary models. Result is inconclusive ($\Delta \ln Z \approx 0.25$), confirming that photometry alone cannot distinguish the scenarios due to the blending degeneracy.
 * **Script:** `code/04_juliet_model_comparison.py`
 
 ## 📂 Repository Structure
@@ -63,20 +70,21 @@ The analysis follows a rigorous forensic protocol implemented in Python.
 ```text
 TOI-864.01-Vetting/
 │
-├── requirements.txt           # Main dependencies (juliet, lightkurve, etc.)
-├── README.md                  # Project documentation
+├── requirements.txt                  # Main dependencies (juliet, lightkurve, etc.)
+├── README.md                         # Project documentation
+├── TOI864_01_ALL_SECTORS_FOLDED.csv  # Lightkurve sectors folded for triceratops
 │
-├── code/                      # Analysis scripts
+├── code/                             # Analysis scripts
     ├── 01_detection_BLS.py
     ├── 02_centroid_test.py
     ├── 03_triceratops_vetting.ipynb  <-- Key validation step
+    ├── 03extra_generate_folded_csv.py
     ├── 04_juliet_model_comparison.py
     ├── 05_sanity_checks.py
     └── 06_planet_parameters.py
-└── figures/                   # Generated plots (included in the paper)
 ```
 ## 🚀 Usage & Reproducibility
-To reproduce the analysis, please note that the Jupyter Notebook (03) requires a specific environment configuration to support triceratops.
+To reproduce the analysis, please note that the ipynb (03) requires a specific environment configuration to support triceratops.
 
 1. Clone the repository
 Bash
@@ -93,21 +101,7 @@ pip install -r requirements.txt
 python code/01_detection_BLS.py
 ```
 ### 3. Running the Validation Notebook (Triceratops)
-**⚠️ IMPORTANT:** The statistical vetting notebook requires a **specific legacy environment** (`numpy==1.26.4`). We strongly recommend creating a **fresh virtual environment** for this step to avoid conflicts.
-
-Bash
-```text
-# Create and activate a new environment
-conda create -n toi_validation python=3.10
-conda activate toi_validation
-
-# Install the specific validation stack AND Jupyter
-pip install -r requirements-jupyter.txt notebook
-
-# Launch the notebook
-jupyter notebook code/03_triceratops_vetting.ipynb
-```
-Note: The notebook contains a built-in patch to resolve AttributeError: module 'numpy' has no attribute 'int'.
+**⚠️ IMPORTANT:** To use Triceratops I recommend following steps in the readme.md of https://github.com/JGB276/TRICERATOPS-plus/tree/main and using jupyter lab (in an isolated python 3.10 environment).
 
 ## 📄 Citation
 If you use this data or methodology, please cite the arXiv paper. If you use the specific code pipeline, you may also cite the software record.
