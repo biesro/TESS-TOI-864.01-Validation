@@ -109,7 +109,7 @@ lc_folded_sec = lc_combined.fold(period=best_period, epoch_time=best_t0 + (best_
 lc_folded_sec.scatter(ax=ax2, color='blue', alpha=0.1, s=1, label='Phase 0.5 Data')
 lc_folded_sec.bin(time_bin_size=0.005).plot(ax=ax2, color='orange', lw=2, label='Mean Flux')
 
-ax2.set_title(f'FALSE POSITIVE CHECK (Phase 0.5)', fontsize=12, fontweight='bold')
+ax2.set_title(f'SECONDARY ECLIPSE CHECK (Phase 0.5)', fontsize=12, fontweight='bold')
 ax2.set_xlim(-0.15, 0.15)
 ax2.set_xlabel('Phase [days]')
 ax2.axhline(1.0, color='green', linestyle='--', lw=2, label='Flux 1.0 (Ideal)')
@@ -139,4 +139,5 @@ else:
     print("⚠️ WARNING: Low SNR. Signal cannot be clearly confirmed.")
 
 print("="*50)
+
 
