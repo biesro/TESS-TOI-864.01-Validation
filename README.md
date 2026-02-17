@@ -5,7 +5,7 @@
 
 ![Python Version](https://img.shields.io/badge/python-3.10-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-[![arXiv](https://img.shields.io/badge/arXiv-2602.14840-b31b1b.svg)](https://arxiv.org/abs/2602.14840)
+[![arXiv](https://img.shields.io/badge/arXiv-2601.02171-b31b1b.svg)](https://arxiv.org/abs/2601.02171)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17881756.svg)](https://doi.org/10.5281/zenodo.17881756)
 [![Status](https://img.shields.io/badge/Status-Probable%20FP-orange.svg)]()
 
